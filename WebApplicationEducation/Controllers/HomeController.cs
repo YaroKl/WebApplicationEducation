@@ -33,6 +33,12 @@ namespace WebApplicationEducation.Controllers
 
         public IActionResult Index()
         {
+            var news = GetNews();
+            return View(news);
+        }
+        
+        public IActionResult Users()
+        {
             var items = GetAllUsers();
             return View(items);
         }
@@ -46,6 +52,23 @@ namespace WebApplicationEducation.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private List<News> GetNews()
+        {
+            using (IDbConnection db = Connection)
+            {
+                List<News> result = db.Query<News>("SELECT * FROM News").ToList();
+                return result;
+            }
+        }
+
+        public class News
+        {
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public DateTime Date { get; set; }
         }
 
         private List<User> GetAllUsers()

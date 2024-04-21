@@ -7,17 +7,18 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+
 <hr />
-<h1>Список пользователей:</h1>
+<h1>Новости:</h1>
 <hr />
 
-@foreach (var item in Model)
+@foreach (var news in Model)
 {
     <div>
-        <div>Id: @item.Id</div>
-        <div>Name: @item.Name</div>
-        <div>Balance: @item.Balance</div>
-        <div>Created date: @item.Created</div>
+        <div>Новость @news.Id :</div>
+        <div><b>@news.Title</b></div>
+        <div>@news.Description</div>
+        <div>Дата: @news.Date</div>
     </div>
     <hr />
 }
